@@ -63,4 +63,24 @@ public class Login extends env_target {
         );
         driver.quit();
     }
+
+    @When("^User input (.*) and (.*)$")
+    public void userInputUsernameAndPassword(String username, String password) {
+        driver.findElement(By.name("user-name")).sendKeys(username);
+        driver.findElement(By.id("password")).sendKeys(password);
+    }
+
+    @Then("^User get verify login (.*)$")
+    public void userGetVerifyLoginResults(String result) {
+        if (result == "Passed"){
+            wait.until(ExpectedConditions.or(
+                    ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[@class='title'][contains(text(), 'Products')]"))
+            ));
+        } else if (result == "Failed") {
+            wait.until(ExpectedConditions.or(
+                    ExpectedConditions.visibilityOfElementLocated(By.className("error-button"))
+            ));
+        }
+        driver.quit();
+    }
 }
