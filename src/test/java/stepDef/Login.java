@@ -27,7 +27,7 @@ public class Login extends env_target {
         WebDriverManager.chromedriver().setup(); //ini menggantikan manual path
 
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless");
+        options.addArguments("--headless"); //menjalankan chrome tanpa membuka jendela chrome
         options.addArguments("--disable-gpu");
         options.addArguments("--no-sandbox");
         options.addArguments("--disable-dev-shm-usage");
