@@ -6,22 +6,33 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import io.github.bonigarcia.wdm.WebDriverManager;
 
 import java.time.Duration;
 
 public class Login extends env_target {
 
     WebDriverWait wait;
+    private WebDriver driver;
 
     @Given("User is in login page")
     public void userIsInLoginPage() {
-        // set driverLocation path
-        System.setProperty("webdriver.chrome.driver", "src\\test\\resources\\drivers\\chromedriver.exe");
-        // Maximize driver
-        driver = new ChromeDriver();
+//        System.setProperty("webdriver.chrome.driver", "src\\test\\resources\\drivers\\chromedriver.exe");
+//        driver = new ChromeDriver();
+        WebDriverManager.chromedriver().setup(); //ini menggantikan manual path
+
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless");
+        options.addArguments("--disable-gpu");
+        options.addArguments("--no-sandbox");
+        options.addArguments("--disable-dev-shm-usage");
+        driver = new ChromeDriver(options);
+
         driver.manage().window().maximize();
         // set url
         driver.get(sauceDemo);
