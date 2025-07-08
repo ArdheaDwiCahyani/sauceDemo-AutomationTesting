@@ -18,7 +18,7 @@ import java.util.Random;
 public class Register extends env_target {
 
     WebDriverWait wait;
-    WebDriver driver;
+    private WebDriver driver;
 
     @Given("User is on parabank homepage")
     public void userIsOnParabankHomepage() {
