@@ -1,4 +1,4 @@
-@TDD @Login
+@TDD
   Feature: LoginTDD
   Scenario Outline: Login with TDD
     Given User is in login page
