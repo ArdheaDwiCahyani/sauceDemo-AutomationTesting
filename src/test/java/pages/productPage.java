@@ -52,7 +52,8 @@ public class productPage extends basePage {
         WebElement button = productCard.findElement(By.tagName("button"));
         wait.until(ExpectedConditions.elementToBeClickable(button)).click();
 
-        wait.until(ExpectedConditions.textToBePresentInElement(button, "Remove"));
+        By removeButtonLocator = By.xpath(xpath + "//button[text()='Remove']");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(removeButtonLocator));
     }
 
     public void clickCartIcon() {
