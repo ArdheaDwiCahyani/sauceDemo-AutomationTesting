@@ -13,13 +13,13 @@ public class Hooks extends env_target {
     @Before
     public void setUp() {
         WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
-//        ChromeOptions options = new ChromeOptions();
-//        options.addArguments("--headless=new"); //menjalankan chrome tanpa membuka jendela chrome
-//        options.addArguments("--disable-gpu");
-//        options.addArguments("--no-sandbox");
-//        options.addArguments("--disable-dev-shm-usage");
-//        driver = new ChromeDriver(options);
+//        driver = new ChromeDriver();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless=new"); //menjalankan chrome tanpa membuka jendela chrome
+        options.addArguments("--disable-gpu");
+        options.addArguments("--no-sandbox");
+        options.addArguments("--disable-dev-shm-usage");
+        driver = new ChromeDriver(options);
         driver.manage().window().maximize();
         driver.get(sauceDemo);
     }
