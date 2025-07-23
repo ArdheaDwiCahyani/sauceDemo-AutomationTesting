@@ -19,6 +19,11 @@ public class Hooks extends env_target {
         options.addArguments("--disable-gpu");
         options.addArguments("--no-sandbox");
         options.addArguments("--disable-dev-shm-usage");
+
+        // Tambahkan opsi unik untuk user-data-dir
+        String userDataDir = System.getProperty("java.io.tmpdir") + "/chrome-profile-" + System.currentTimeMillis();
+        options.addArguments("--user-data-dir=" + userDataDir);
+
         driver = new ChromeDriver(options);
         driver.manage().window().maximize();
         driver.get(sauceDemo);
