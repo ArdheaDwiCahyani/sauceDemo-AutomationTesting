@@ -1,24 +1,29 @@
 package pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
 
 public class cartPage extends basePage {
         public boolean isProductInCart(String productName) {
-        List<WebElement> items = driver.findElements(
-                By.xpath("//div[@class='cart_item']//div[@class='inventory_item_name' and text()='" + productName + "']")
-        );
-        return !items.isEmpty();
+            try {
+                String xpath = "//div[@class='cart_item']//div[@class='inventory_item_name' and text()='" + productName + "']";
+                wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
+                return true;
+            } catch (TimeoutException e) {
+                return false;
+            }
     }
 
     public void removeProductFromCart(String productName) {
-        WebElement productCard = driver.findElement(
-                By.xpath("//div[@class='cart_item'][.//div[text()='" + productName + "']]")
-        );
-        productCard.findElement(By.xpath(".//button[contains(text(), 'Remove')]")).click();
+        String xpath = "//div[@class='cart_item'][.//div[text()='" + productName + "']]";
+        WebElement productCard = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
+        WebElement removeButton = productCard.findElement(By.xpath(".//button[contains(text(), 'Remove')]"));
+        removeButton.click();
     }
 
     public void clickCheckout() {

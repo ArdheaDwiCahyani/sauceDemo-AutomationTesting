@@ -2,6 +2,7 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 
 import java.util.ArrayList;
@@ -45,10 +46,13 @@ public class productPage extends basePage {
     }
 
     public void addProduct(String productName) {
-        WebElement productCard = driver.findElement(
-                By.xpath("//div[@class='inventory_item'][.//div[contains(text(),'" + productName + "')]]")
-        );
-        productCard.findElement(By.tagName("button")).click();
+        String xpath = "//div[@class='inventory_item'][.//div[contains(text(),'" + productName + "')]]";
+        WebElement productCard = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
+
+        WebElement button = productCard.findElement(By.tagName("button"));
+        wait.until(ExpectedConditions.elementToBeClickable(button)).click();
+
+        wait.until(ExpectedConditions.textToBePresentInElement(button, "Remove"));
     }
 
     public void clickCartIcon() {
